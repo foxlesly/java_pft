@@ -42,11 +42,19 @@ public class AddNewContactTests {
   }
 
   private void enterInfoAboutNewPerson() {
-    addFullName(new FullUserNameInfo("firstname", "lastname", "middlename"));
-    addContatInfo(new ContactInfo("home", "mobile", "email", "address2"));
+    addContatInfo(new AboutContactInfo("home", "mobile", "email", "address2", "firstname", "lastname", "middlename"));
   }
 
-  private void addContatInfo(ContactInfo contactInfoGroup) {
+  private void addContatInfo(AboutContactInfo contactInfoGroup) {
+    driver.findElement(By.name("firstname")).click();
+    driver.findElement(By.name("firstname")).clear();
+    driver.findElement(By.name(contactInfoGroup.getUserFirstName())).sendKeys("Dmitriy");
+    driver.findElement(By.name("middlename")).click();
+    driver.findElement(By.name("middlename")).clear();
+    driver.findElement(By.name(contactInfoGroup.getUserMiddleName())).sendKeys("Vasilevich");
+    driver.findElement(By.name("lastname")).click();
+    driver.findElement(By.name("lastname")).clear();
+    driver.findElement(By.name(contactInfoGroup.getUserLastName())).sendKeys("Fedotov");
     driver.findElement(By.name("home")).click();
     driver.findElement(By.name("home")).clear();
     driver.findElement(By.name(contactInfoGroup.getHomeNumber())).sendKeys("231523");
@@ -59,18 +67,6 @@ public class AddNewContactTests {
     driver.findElement(By.name("address2")).click();
     driver.findElement(By.name("address2")).clear();
     driver.findElement(By.name(contactInfoGroup.getCityHome())).sendKeys("Moscow");
-  }
-
-  private void addFullName(FullUserNameInfo fullUserNameGroup) {
-    driver.findElement(By.name("firstname")).click();
-    driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name(fullUserNameGroup.getUserFirstName())).sendKeys("Dmitriy");
-    driver.findElement(By.name("lastname")).click();
-    driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name(fullUserNameGroup.getUserLastName())).sendKeys("Fedotov");
-    driver.findElement(By.name("middlename")).click();
-    driver.findElement(By.name("middlename")).clear();
-    driver.findElement(By.name(fullUserNameGroup.getUserMiddleName())).sendKeys("Vasilevich");
   }
 
   private void saveNewContact() {
