@@ -5,12 +5,13 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.pft.addressbook.model.AboutContactInfo;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManadger {
-  private WebDriver wd;
+  public WebDriver wd;
 
   public void init() {
     wd = new FirefoxDriver();
@@ -27,6 +28,34 @@ public class ApplicationManadger {
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  public void enterInfoAboutNewPerson() {
+    addContatInfo(new AboutContactInfo("home", "mobile", "email", "address2", "firstname", "lastname", "middlename"));
+  }
+
+  private void addContatInfo(AboutContactInfo contactInfoGroup) {
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name(contactInfoGroup.getUserFirstName())).sendKeys("Dmitriy");
+    wd.findElement(By.name("middlename")).click();
+    wd.findElement(By.name("middlename")).clear();
+    wd.findElement(By.name(contactInfoGroup.getUserMiddleName())).sendKeys("Vasilevich");
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name(contactInfoGroup.getUserLastName())).sendKeys("Fedotov");
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name(contactInfoGroup.getHomeNumber())).sendKeys("231523");
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name(contactInfoGroup.getMobileNumber())).sendKeys("890652365478");
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name(contactInfoGroup.getMailAddress())).sendKeys("fedotov.dmitriy@mail.ru");
+    wd.findElement(By.name("address2")).click();
+    wd.findElement(By.name("address2")).clear();
+    wd.findElement(By.name(contactInfoGroup.getCityHome())).sendKeys("Moscow");
   }
 
   public void logout() {
@@ -65,6 +94,8 @@ public class ApplicationManadger {
     wd.quit();
   }
 
+
+
   private boolean isElementPresent(By by) {
     try {
       wd.findElement(by);
@@ -89,5 +120,13 @@ public class ApplicationManadger {
 
   public void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
+  }
+
+  public void saveNewContact() {
+    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+  }
+
+  public void gotoAddNewContact() {
+    wd.findElement(By.linkText("add new")).click();
   }
 }
