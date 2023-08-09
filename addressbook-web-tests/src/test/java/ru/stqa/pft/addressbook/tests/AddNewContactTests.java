@@ -6,10 +6,10 @@ public class AddNewContactTests extends TestBase {
 
   @Test
   public void testAddNewContact() {
-    app.gotoAddNewContact();
-    app.enterInfoAboutNewPerson();
-    app.saveNewContact();
-    app.logout();
+    app.getNavigationHelper().gotoAddNewContact();
+    app.getGroupHelper().enterInfoAboutNewPerson();
+    app.getGroupHelper().saveNewContact();
+    //app.getSessionHelper().logout();
   }
 
 }
