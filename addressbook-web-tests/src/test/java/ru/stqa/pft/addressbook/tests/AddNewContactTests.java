@@ -7,8 +7,8 @@ public class AddNewContactTests extends TestBase {
   @Test
   public void testAddNewContact() {
     app.getNavigationHelper().gotoAddNewContact();
-    app.getGroupHelper().enterInfoAboutNewPerson();
-    app.getGroupHelper().saveNewContact();
+    app.getContactHelper().enterInfoAboutNewPerson();
+    app.getContactHelper().saveNewContact();
     //app.getSessionHelper().logout();
   }
 
