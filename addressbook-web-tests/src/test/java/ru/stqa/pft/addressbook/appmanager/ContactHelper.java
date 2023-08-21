@@ -9,19 +9,23 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void enterInfoAboutNewPerson() {
-    addContatInfo(new AboutContactInfo("home", "mobile", "email", "address2", "firstname", "lastname", "middlename"));
+  public void enterInfoAboutNewPerson(AboutContactInfo contactInfo) {
+    addContactInfo(contactInfo);
   }
-    private void addContatInfo (AboutContactInfo contactInfoGroup) {
-    type(By.name(contactInfoGroup.getUserFirstName()), By.name("firstname"), "Dmitriy");
-    type(By.name(contactInfoGroup.getUserMiddleName()), By.name("middlename"), "Vasilevich");
-    type(By.name(contactInfoGroup.getUserLastName()), By.name("lastname"), "Fedotov");
-    type(By.name(contactInfoGroup.getHomeNumber()), By.name("home"), "231523");
-    type(By.name(contactInfoGroup.getMobileNumber()), By.name("mobile"), "890652365478");
-    type(By.name(contactInfoGroup.getMailAddress()), By.name("email"), "fedotov.dmitriy@mail.ru");
-    type(By.name(contactInfoGroup.getCityHome()), By.name("address2"), "Moscow");
-    }
 
+  public void enterModifiedContactInfo(AboutContactInfo contactInfo) {
+    addContactInfo(contactInfo);
+  }
+
+  private void addContactInfo(AboutContactInfo contactInfo) {
+    type(By.name(contactInfo.getUserFirstName()), By.name("firstname"), contactInfo.getUserFirstName());
+    type(By.name(contactInfo.getUserMiddleName()), By.name("middlename"), contactInfo.getUserMiddleName());
+    type(By.name(contactInfo.getUserLastName()), By.name("lastname"), contactInfo.getUserLastName());
+    type(By.name(contactInfo.getHomeNumber()), By.name("home"), contactInfo.getHomeNumber());
+    type(By.name(contactInfo.getMobileNumber()), By.name("mobile"), contactInfo.getMobileNumber());
+    type(By.name(contactInfo.getMailAddress()), By.name("email"), contactInfo.getMailAddress());
+    type(By.name(contactInfo.getCityHome()), By.name("address2"), contactInfo.getCityHome());
+  }
   public void selectContact() {
     click(By.name("selected[]"));
   }
