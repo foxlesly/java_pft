@@ -9,9 +9,8 @@ public class AddNewContactTests extends TestBase {
 
   public void testAddNewContact() {
     app.getNavigationHelper().gotoAddNewContact();
-    AboutContactInfo contactInfo = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich");
-    app.getContactHelper().enterInfoAboutNewPerson(contactInfo);
-    app.getContactHelper().saveNewContact();
+    AboutContactInfo contactInfo = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
+    app.getContactHelper().enterInfoAboutNewPerson(contactInfo, true);
   }
   //app.getSessionHelper().logout();
 }
