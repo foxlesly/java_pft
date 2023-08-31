@@ -55,7 +55,9 @@ public class ApplicationManadger {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper() { return contactHelper; }
+  public ContactHelper getContactHelper() {
+    return contactHelper;
+  }
 
 //  public SessionHelper getSessionHelper() {return sessionHelper;}
 
