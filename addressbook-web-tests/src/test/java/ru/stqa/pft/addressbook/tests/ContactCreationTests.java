@@ -9,18 +9,14 @@ public class ContactCreationTests extends TestBase {
   @Test
 
   public void testContactCreation() {
-
-    app.getNavigationHelper().gotoAddNewContact();
-    AboutContactInfo newContact = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
-    if (!app.getGroupHelper().isGroupExists("Test1")){
-      app.getNavigationHelper().goToGroupPage();
-      app.getGroupHelper().createGroup(new GroupData("Test1", null, null));
-
+    app.getNavigationHelper().goToGroupPage();
+    if (!app.getGroupHelper().isGroupExists("test1")) {
+      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
     }
     app.getNavigationHelper().gotoAddNewContact();
+    AboutContactInfo newContact = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
     app.getContactHelper().createContact(newContact);
   }
-
   //app.getSessionHelper().logout();
 }
 
