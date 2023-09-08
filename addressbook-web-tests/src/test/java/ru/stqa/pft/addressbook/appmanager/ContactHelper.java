@@ -73,4 +73,7 @@ public class ContactHelper extends HelperBase {
     saveNewContact();
   }
 
+  public int getGroupCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
