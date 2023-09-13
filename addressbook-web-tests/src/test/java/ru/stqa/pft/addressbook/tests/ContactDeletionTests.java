@@ -18,9 +18,10 @@ public class ContactDeletionTests extends TestBase {
       app.getGroupHelper().createGroup(new GroupData("test1", null, null));
       app.getNavigationHelper().gotoHomePage();
     }
-    app.getNavigationHelper().gotoAddNewContact();
+    app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereAContact()) {
       AboutContactInfo newContact = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
+      app.getNavigationHelper().gotoAddNewContact();
       app.getContactHelper().createContact(newContact);
     }
 
