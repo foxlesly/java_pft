@@ -83,14 +83,8 @@ public class AboutContactInfo {
   public String toString() {
     return "AboutContactInfo{" +
             "id=" + id +
-            ", homeNumber='" + homeNumber + '\'' +
-            ", mobileNumber='" + mobileNumber + '\'' +
-            ", mailAddress='" + mailAddress + '\'' +
-            ", cityHome='" + cityHome + '\'' +
             ", userFirstName='" + userFirstName + '\'' +
             ", userLastName='" + userLastName + '\'' +
-            ", userMiddleName='" + userMiddleName + '\'' +
-            ", group='" + group + '\'' +
             '}';
   }
 
@@ -105,29 +99,14 @@ public class AboutContactInfo {
 
     AboutContactInfo that = (AboutContactInfo) o;
 
-    if (id != that.id) return false;
-    if (!Objects.equals(homeNumber, that.homeNumber)) return false;
-    if (!Objects.equals(mobileNumber, that.mobileNumber)) return false;
-    if (!Objects.equals(mailAddress, that.mailAddress)) return false;
-    if (!Objects.equals(cityHome, that.cityHome)) return false;
     if (!Objects.equals(userFirstName, that.userFirstName)) return false;
-    if (!Objects.equals(userLastName, that.userLastName)) return false;
-    if (!Objects.equals(userMiddleName, that.userMiddleName))
-      return false;
-    return Objects.equals(group, that.group);
+    return Objects.equals(userLastName, that.userLastName);
   }
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (homeNumber != null ? homeNumber.hashCode() : 0);
-    result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);
-    result = 31 * result + (mailAddress != null ? mailAddress.hashCode() : 0);
-    result = 31 * result + (cityHome != null ? cityHome.hashCode() : 0);
-    result = 31 * result + (userFirstName != null ? userFirstName.hashCode() : 0);
+    int result = userFirstName != null ? userFirstName.hashCode() : 0;
     result = 31 * result + (userLastName != null ? userLastName.hashCode() : 0);
-    result = 31 * result + (userMiddleName != null ? userMiddleName.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
     return result;
   }
 }

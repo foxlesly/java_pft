@@ -21,7 +21,15 @@ public class ContactModificationTests extends TestBase {
     }
     app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereAContact()) {
-      AboutContactInfo newContact = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
+      AboutContactInfo newContact = new AboutContactInfo(
+              "231523",
+              "890652365478",
+              "fedotov.dmitriy@mail.ru",
+              "Moscow", "Dmitriy",
+              "Fedotov",
+              "Vasilevich",
+              "test1");
+
       app.getNavigationHelper().gotoAddNewContact();
       app.getContactHelper().createContact(newContact);
     }
@@ -29,7 +37,17 @@ public class ContactModificationTests extends TestBase {
     List<AboutContactInfo> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().initContactModification();
-    AboutContactInfo modifiedContactInfo = new AboutContactInfo(before.get(before.size() - 1).getId(), "modifiedHome", "modifiedMobile", "modifiedEmail", "modifiedCity", "modifiedFirstName", "modifiedLastName", "modifiedMiddleName", null);
+    AboutContactInfo modifiedContactInfo = new AboutContactInfo
+            (before.get(before.size() - 1).getId(),
+                    "modifiedHome",
+                    "modifiedMobile",
+                    "modifiedEmail",
+                    "modifiedCity",
+                    "modifiedFirstName",
+                    "modifiedLastName",
+                    "modifiedMiddleName",
+                    null);
+
     app.getContactHelper().enterModifiedContactInfo(modifiedContactInfo, false);
     app.getContactHelper().updateContactInfo();
     app.getNavigationHelper().gotoHomePage();
@@ -51,7 +69,6 @@ public class ContactModificationTests extends TestBase {
         return Integer.compare(c1.getId(), c2.getId());
       }
     };
-
     // Сортируем списки
     before.sort(byNameId);
     after.sort(byNameId);
