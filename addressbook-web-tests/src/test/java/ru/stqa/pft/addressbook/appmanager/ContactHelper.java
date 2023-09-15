@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.AboutContactInfo;
-import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +16,15 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void enterInfoAboutNewPerson(AboutContactInfo contactInfo, boolean creation) {
+  public void enterInfoAboutNewPerson(ContactData contactInfo, boolean creation) {
     addContactInfo(contactInfo, creation);
   }
 
-  public void enterModifiedContactInfo(AboutContactInfo contactInfo, boolean creation) {
+  public void enterModifiedContactInfo(ContactData contactInfo, boolean creation) {
     addContactInfo(contactInfo, creation);
   }
 
-  private void addContactInfo(AboutContactInfo contactInfo, boolean creation) {
+  private void addContactInfo(ContactData contactInfo, boolean creation) {
     type(By.name("firstname"), contactInfo.getUserFirstName());
     type(By.name("middlename"), contactInfo.getUserMiddleName());
     type(By.name("lastname"), contactInfo.getUserLastName());
@@ -76,7 +75,7 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createContact(AboutContactInfo contact) {
+  public void createContact(ContactData contact) {
     enterInfoAboutNewPerson(contact, true);
     saveNewContact();
   }
@@ -85,15 +84,15 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<AboutContactInfo> getContactList() {
-    List<AboutContactInfo> contacts = new ArrayList<>();
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> contactDataElements = element.findElements(By.cssSelector("td"));
       int id = Integer.parseInt(contactDataElements.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String userFirstName = contactDataElements.get(2).getText();
       String userLastName = contactDataElements.get(1).getText();
-      AboutContactInfo contact = new AboutContactInfo(
+      ContactData contact = new ContactData(
               id,
               null,
               null,

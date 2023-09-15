@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.AboutContactInfo;
+import ru.stqa.pft.addressbook.model.ContactData;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -13,21 +13,21 @@ public class ContactCreationTests extends TestBase {
   @Test
 
   public void testContactCreation() {
-    app.getNavigationHelper().goToGroupPage();
-    if (!app.getGroupHelper().isGroupExists("test1")) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+    app.goTo().groupPage();
+    if (!app.group().isGroupExists("test1")) {
+      app.group().create(new GroupData("test1", null, null));
     }
-    app.getNavigationHelper().gotoHomePage();
-    List<AboutContactInfo> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().gotoAddNewContact();
-    AboutContactInfo newContact = new AboutContactInfo("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
+    app.goTo().gotoHomePage();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.goTo().gotoAddNewContact();
+    ContactData newContact = new ContactData("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
     app.getContactHelper().createContact(newContact);
-    app.getNavigationHelper().gotoHomePage();
-    List<AboutContactInfo> after = app.getContactHelper().getContactList();
+    app.goTo().gotoHomePage();
+    List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(newContact);
-    Comparator<? super AboutContactInfo> byNameId = (c1, c2) -> {
+    Comparator<? super ContactData> byNameId = (c1, c2) -> {
       String name1 = c1.getUserFirstName() + " " + c1.getUserLastName();
       String name2 = c2.getUserFirstName() + " " + c2.getUserLastName();
       int nameComparison = name1.compareTo(name2);
