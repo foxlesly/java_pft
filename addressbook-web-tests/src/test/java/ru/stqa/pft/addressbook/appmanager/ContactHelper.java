@@ -20,7 +20,7 @@ public class ContactHelper extends HelperBase {
     addContactInfo(contactInfo, creation);
   }
 
-  public void enterModifiedContactInfo(ContactData contactInfo, boolean creation) {
+  public void enterModifiedContact(ContactData contactInfo, boolean creation) {
     addContactInfo(contactInfo, creation);
   }
 
@@ -75,16 +75,22 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     enterInfoAboutNewPerson(contact, true);
     saveNewContact();
+  }
+
+  public void delete(List<ContactData> before) {
+    selectContact(before.size() - 1);
+    deleteSelectedContact();
+    confirmDeleteContact();
   }
 
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {

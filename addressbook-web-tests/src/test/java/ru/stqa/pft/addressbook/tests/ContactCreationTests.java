@@ -10,20 +10,34 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().HomePage();
+    app.goTo().groupPage();
+    if (!app.group().isGroupExists("test1")) {
+      app.group().create(new GroupData().withName("test1"));
+      app.goTo().HomePage();
+    }
+  }
+
   @Test
 
   public void testContactCreation() {
-    app.goTo().groupPage();
-    if (!app.group().isGroupExists("test1")) {
-      app.group().create(new GroupData("test1", null, null));
-    }
-    app.goTo().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.goTo().gotoAddNewContact();
-    ContactData newContact = new ContactData("231523", "890652365478", "fedotov.dmitriy@mail.ru", "Moscow", "Dmitriy", "Fedotov", "Vasilevich", "test1");
-    app.getContactHelper().createContact(newContact);
-    app.goTo().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.goTo().HomePage();
+    List<ContactData> before = app.contact().list();
+    app.goTo().AddNewContact();
+    ContactData newContact = new ContactData()
+            .withHomeNumber("231523")
+            .withMobileNumber("890652365478")
+            .withMailAddress("fedotov.dmitriy@mail.ru")
+            .withCityHome("Moscow")
+            .withUserFirstName("Dmitriy")
+            .withUserLastName("Fedotov")
+            .withUserMiddleName("Vasilevich")
+            .withGroup("test1");
+    app.contact().create(newContact);
+    app.goTo().HomePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(newContact);

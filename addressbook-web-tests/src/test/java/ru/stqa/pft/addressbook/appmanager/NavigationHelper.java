@@ -17,7 +17,7 @@ public class NavigationHelper extends HelperBase {
     wd.findElement(By.linkText("groups")).click();
   }
 
-  public void gotoAddNewContact() {
+  public void AddNewContact() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
       return;
@@ -27,7 +27,7 @@ public class NavigationHelper extends HelperBase {
   //  click(By.linkText("add new"));
 
 
-  public void gotoHomePage() {
+  public void HomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }

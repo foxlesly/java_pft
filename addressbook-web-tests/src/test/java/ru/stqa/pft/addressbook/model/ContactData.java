@@ -4,48 +4,20 @@ import java.util.Objects;
 
 public class ContactData {
 
-  private int id;
+  private int id = Integer.MAX_VALUE;;
 
   public int getId() {
     return id;
   }
 
-  private final String homeNumber;
-  private final String mobileNumber;
-  private final String mailAddress;
-  private final String cityHome;
-  private final String userFirstName;
-  private final String userLastName;
-  private final String userMiddleName;
-  private final String group;
-
-
-  public ContactData(int id, String homeNumber, String MobileNumber,
-                     String mailAddress, String cityHome, String userFirstName, String userLastName, String userMiddleName, String group) {
-    this.id = id;
-    this.homeNumber = homeNumber;
-    this.mobileNumber = MobileNumber;
-    this.mailAddress = mailAddress;
-    this.cityHome = cityHome;
-    this.userFirstName = userFirstName;
-    this.userLastName = userLastName;
-    this.userMiddleName = userMiddleName;
-    this.group = group;
-  }
-
-
-  public ContactData(String homeNumber, String mobileNumber, String mailAddress, String cityHome, String userFirstName, String userLastName, String userMiddleName, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.homeNumber = homeNumber;
-    this.mobileNumber = mobileNumber;
-    this.mailAddress = mailAddress;
-    this.cityHome = cityHome;
-    this.userFirstName = userFirstName;
-    this.userLastName = userLastName;
-    this.userMiddleName = userMiddleName;
-    this.group = group;
-  }
-
+  private String homeNumber;
+  private String mobileNumber;
+  private String mailAddress;
+  private String cityHome;
+  private String userFirstName;
+  private String userLastName;
+  private String userMiddleName;
+  private String group;
 
   public String getHomeNumber() {
     return homeNumber;
@@ -88,8 +60,49 @@ public class ContactData {
             '}';
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withHomeNumber(String homeNumber) {
+    this.homeNumber = homeNumber;
+    return this;
+  }
+
+  public ContactData withMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+    return this;
+  }
+
+  public ContactData withMailAddress(String mailAddress) {
+    this.mailAddress = mailAddress;
+    return this;
+  }
+
+  public ContactData withCityHome(String cityHome) {
+    this.cityHome = cityHome;
+    return this;
+  }
+
+  public ContactData withUserFirstName(String userFirstName) {
+    this.userFirstName = userFirstName;
+    return this;
+  }
+
+  public ContactData withUserLastName(String userLastName) {
+    this.userLastName = userLastName;
+    return this;
+  }
+
+  public ContactData withUserMiddleName(String userMiddleName) {
+    this.userMiddleName = userMiddleName;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   @Override
