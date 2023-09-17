@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
 
@@ -20,7 +21,7 @@ public class ContactDeletionTests extends TestBase {
       app.goTo().HomePage();
     }
     app.goTo().HomePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       ContactData newContact = new ContactData()
               .withHomeNumber("231523")
               .withMobileNumber("890652365478")
@@ -42,13 +43,14 @@ public class ContactDeletionTests extends TestBase {
   public void testContactDeletion() {
 
     app.goTo().HomePage();
-    List<ContactData> before = app.contact().list();
-    app.contact().delete(before);
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
     app.goTo().HomePage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(deletedContact);
     Assert.assertEquals(before, after);
   }
 }

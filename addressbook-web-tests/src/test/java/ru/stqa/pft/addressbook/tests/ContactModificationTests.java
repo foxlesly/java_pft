@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -41,11 +42,11 @@ public class ContactModificationTests extends TestBase {
 
   public void testContactModification() {
     app.goTo().HomePage();
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
-    app.contact().initContactModification(index);
-    ContactData modifiedContact = new ContactData()
-            .withId(before.get(index).getId())
+    Set<ContactData> before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    app.contact().initContactModification(0);
+    ContactData modifyContact = new ContactData()
+            .withId(modifiedContact.getId())
             .withHomeNumber("modifiedHome")
             .withMobileNumber("modifiedMobile")
             .withMailAddress("modifiedEmail")
@@ -54,30 +55,15 @@ public class ContactModificationTests extends TestBase {
             .withUserLastName("modifiedLastName")
             .withUserMiddleName("modifiedMiddleName");
 
-    app.contact().enterModifiedContact(modifiedContact, false);
+    app.contact().enterModifiedContact(modifyContact, false);
     app.contact().updateContactInfo();
     app.goTo().HomePage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size());
 
 
-    before.remove(index);
-    before.add(modifiedContact);
-    Comparator<? super ContactData> byNameId = (c1, c2) -> {
-      String name1 = c1.getUserFirstName() + " " + c1.getUserLastName();
-      String name2 = c2.getUserFirstName() + " " + c2.getUserLastName();
-      int nameComparison = name1.compareTo(name2);
-
-      if (nameComparison != 0) {
-        return nameComparison;
-      } else {
-        // Если имена одинаковые, сравниваем по id.
-        return Integer.compare(c1.getId(), c2.getId());
-      }
-    };
-    // Сортируем списки
-    before.sort(byNameId);
-    after.sort(byNameId);
+    before.remove(modifiedContact);
+    before.add(modifyContact);
     Assert.assertEquals(before, after);
   }
 }

@@ -112,13 +112,15 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != that.id) return false;
     if (!Objects.equals(userFirstName, that.userFirstName)) return false;
     return Objects.equals(userLastName, that.userLastName);
   }
 
   @Override
   public int hashCode() {
-    int result = userFirstName != null ? userFirstName.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (userFirstName != null ? userFirstName.hashCode() : 0);
     result = 31 * result + (userLastName != null ? userLastName.hashCode() : 0);
     return result;
   }
