@@ -18,12 +18,24 @@ public class ContactData {
   private String userLastName;
   private String userMiddleName;
   private String group;
+  private String workPhone;
 
-  public String getHomeNumber() {
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  private String allPhones;
+
+  public String getHomePhone() {
     return homeNumber;
   }
 
-  public String getMobileNumber() {
+  public String getMobilePhone() {
     return mobileNumber;
   }
 
@@ -51,6 +63,10 @@ public class ContactData {
     return group;
   }
 
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
   @Override
   public String toString() {
     return "AboutContactInfo{" +
@@ -65,13 +81,13 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withHomeNumber(String homeNumber) {
+  public ContactData withHomePhones(String homeNumber) {
     this.homeNumber = homeNumber;
     return this;
   }
 
-  public ContactData withMobileNumber(String mobileNumber) {
-    this.mobileNumber = mobileNumber;
+  public ContactData withWorkPhones(String work) {
+    this.workPhone = work;
     return this;
   }
 
@@ -102,6 +118,11 @@ public class ContactData {
 
   public ContactData withGroup(String group) {
     this.group = group;
+    return this;
+  }
+
+  public ContactData withMobilePhones(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
     return this;
   }
 
