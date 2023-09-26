@@ -56,11 +56,17 @@ public class ContactPhoneTests extends TestBase {
   private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> !s.equals(""))
-            .map(ContactPhoneTests::cleaned)
+            .map(ContactPhoneTests::cleanedEmail)
             .collect(Collectors.joining("\n"));
   }
 
   public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
+
+  public static String cleanedEmail(String email) {
+    return email.replaceAll("[-()]", "");
+  }
 }
+
+
