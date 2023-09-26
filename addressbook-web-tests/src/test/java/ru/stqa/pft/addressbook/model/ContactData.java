@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class ContactData {
 
-  private int id = Integer.MAX_VALUE;;
+  private int id = Integer.MAX_VALUE;
+  ;
 
   public int getId() {
     return id;
@@ -12,24 +13,29 @@ public class ContactData {
 
   private String homeNumber;
   private String mobileNumber;
-  private String mailAddress;
   private String cityHome;
   private String userFirstName;
   private String userLastName;
   private String userMiddleName;
   private String group;
   private String workPhone;
+  private String allPhones;
+
+  private String allEmails;
+  private String mail;
+  private String email2;
+  private String email3;
+  private String address;
+
+  // private String allAddress;
 
   public String getAllPhones() {
     return allPhones;
   }
 
-  public ContactData withAllPhones(String allPhones) {
-    this.allPhones = allPhones;
-    return this;
+  public String getWorkPhone() {
+    return workPhone;
   }
-
-  private String allPhones;
 
   public String getHomePhone() {
     return homeNumber;
@@ -39,12 +45,11 @@ public class ContactData {
     return mobileNumber;
   }
 
-  public String getMailAddress() {
-    return mailAddress;
-  }
-
-  public String getCityHome() {
-    return cityHome;
+  // public String getAddress2() {
+//    return cityHome;
+//  }
+  public String getGroup() {
+    return group;
   }
 
   public String getUserFirstName() {
@@ -59,13 +64,29 @@ public class ContactData {
     return userMiddleName;
   }
 
-  public String getGroup() {
-    return group;
+  public String getEmail1() {
+    return mail;
   }
 
-  public String getWorkPhone() {
-    return workPhone;
+  public String getEmail2() {
+    return email2;
   }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+//  public String getAllddress() {
+//    return allAddress;
+//  }
 
   @Override
   public String toString() {
@@ -89,15 +110,36 @@ public class ContactData {
   public ContactData withWorkPhones(String work) {
     this.workPhone = work;
     return this;
+
   }
 
-  public ContactData withMailAddress(String mailAddress) {
-    this.mailAddress = mailAddress;
+  public ContactData withMobilePhones(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
     return this;
   }
 
-  public ContactData withCityHome(String cityHome) {
-    this.cityHome = cityHome;
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactData withMail1(String mailAddress) {
+    this.mail = mailAddress;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
     return this;
   }
 
@@ -121,10 +163,20 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withMobilePhones(String mobileNumber) {
-    this.mobileNumber = mobileNumber;
+  public ContactData withAddress2(String cityHome) {
+    this.cityHome = cityHome;
     return this;
   }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+//  public ContactData withAllAddress(String allAddress) {
+//    this.allAddress = allAddress;
+//    return this;
+//  }
+
 
   @Override
   public boolean equals(Object o) {

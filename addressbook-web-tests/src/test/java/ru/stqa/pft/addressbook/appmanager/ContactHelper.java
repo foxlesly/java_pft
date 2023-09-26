@@ -11,7 +11,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import java.util.List;
 
 
-
 public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -32,8 +31,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactInfo.getHomePhone());
     type(By.name("mobile"), contactInfo.getMobilePhone());
     type(By.name("work"), contactInfo.getWorkPhone());
-    type(By.name("email"), contactInfo.getMailAddress());
-    type(By.name("address2"), contactInfo.getCityHome());
+    type(By.name("email"), contactInfo.getEmail1());
+    type(By.name("email2"), contactInfo.getEmail2());
+    type(By.name("email3"), contactInfo.getEmail3());
+    // type(By.name("address2"), contactInfo.getAddress2());
+    type(By.name("address"), contactInfo.getAddress());
 
     if (creation) { // Проверка, создание это или модификация
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactInfo.getGroup());
@@ -110,13 +112,16 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(contactDataElements.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String userFirstName = contactDataElements.get(2).getText();
       String userLastName = contactDataElements.get(1).getText();
+      String allEmails = contactDataElements.get(4).getText();
       String allPhones = contactDataElements.get(5).getText();
+      String address = contactDataElements.get(3).getText();
       ContactData contact = new ContactData().withId(id).withUserFirstName(userFirstName)
-              .withUserLastName(userLastName).withAllPhones(allPhones);
+              .withUserLastName(userLastName).withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address);
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
   }
+
   public ContactData infoFormEditForm(ContactData contact) {
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -126,12 +131,20 @@ public class ContactHelper extends HelperBase {
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
     String email = wd.findElement(By.name("email")).getAttribute("value");
-    String address2 = wd.findElement(By.name("address2")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
     wd.navigate().back();
     return new ContactData()
             .withId(contact.getId()).withUserFirstName(firstname)
             .withUserLastName(lastname).withUserMiddleName(middlename)
-            .withHomePhones(home).withMobilePhones(mobile).withWorkPhones(work).withMailAddress(email).withMailAddress(address2);
+            .withHomePhones(home)
+            .withMobilePhones(mobile)
+            .withWorkPhones(work)
+            .withMail1(email)
+            .withEmail2(email2)
+            .withEmail3(email3)
+            .withAddress(address);
 
   }
 }

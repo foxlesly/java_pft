@@ -20,8 +20,11 @@ public class ContactPhoneTests extends TestBase {
               .withHomePhones("231523")
               .withMobilePhones("890652365478")
               .withWorkPhones("565656")
-              .withMailAddress("fedotov.dmitriy@mail.ru")
-              .withCityHome("Moscow")
+              .withMail1("fedotov.dmitriy@mail.ru")
+              .withEmail2("test1@test.ru")
+              .withEmail3("test2@test.ru")
+              .withAddress("City")
+              .withAddress2("Moscow")
               .withUserFirstName("Dmitriy")
               .withUserLastName("Fedotov")
               .withUserMiddleName("Vasilevich")
@@ -36,15 +39,23 @@ public class ContactPhoneTests extends TestBase {
   public void testsContactPhones() {
     app.goTo().HomePage();
     ContactData contact = app.contact().all().iterator().next();
-    ContactData contactInfoFormEditForm =  app.contact().infoFormEditForm(contact);
-
+    ContactData contactInfoFormEditForm = app.contact().infoFormEditForm(contact);
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFormEditForm)));
+    assertThat(contact.getAddress(), equalTo(contactInfoFormEditForm.getAddress()));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFormEditForm)));
 
   }
 
   private String mergePhones(ContactData contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s) -> ! s.equals(""))
+            .stream().filter((s) -> !s.equals(""))
+            .map(ContactPhoneTests::cleaned)
+            .collect(Collectors.joining("\n"));
+  }
+
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((s) -> !s.equals(""))
             .map(ContactPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
