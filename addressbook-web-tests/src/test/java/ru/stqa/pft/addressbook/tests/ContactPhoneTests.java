@@ -64,8 +64,11 @@ public class ContactPhoneTests extends TestBase {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 
+  //  public static String cleanedEmail(String email) {
+//    return email.replaceAll("[-()]", "");
+//  }
   public static String cleanedEmail(String email) {
-    return email.replaceAll("[-()]", "");
+    return email;
   }
 }
 
